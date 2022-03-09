@@ -53,3 +53,58 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #45a049;
 }
+
+input[type=checkbox] {
+    width: 10px;
+    transform: scale(2.0);
+    margin-left: 20px;
+}
+
+textarea:required:invalid, input:required:invalid {
+    background-color: lightyellow;
+}
+
+body {
+    font-family:'Palatino Linotype', serif;
+    max-width: 650 px;
+    padding: 0px 30px;
+}
+
+h1 {
+    margin-bottom: 0px;
+}
+
+p {
+    margin-top: 0px;
+}
+
+fieldset {
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+legend {
+    padding: 0px 3px;
+    font-weight: bold;
+    font-variant: small-caps;
+}
+
+label {
+    width: 300 px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 3px;
+}
+
+em {
+    font-weight: bold;
+    font-style: normal;
+    color: red;
+}
+
+input:focus {
+    background: #eaeaea;
+}
+
+
+
