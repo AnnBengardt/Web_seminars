@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Скоринг</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="http://localhost:3000/scoring" method="POST">
+        <h1>Форма для заполнения</h1>
+        <i>Пожалуйста, заполните форму</i>
+        <fieldset>
+            <legend>Контактная информация</legend>
+            <label for="name">Имя и Фамилия<em>*</em>  </label>
+            <input type="text" id="name" name="name" placeholder="Иван Иванов" required autofocus value="Петр Петров"> <br>
+            <label for="phone">Номер телефона  </label>
+            <input type="text" id="phone" name="phone" placeholder="1 (234) 567-89-00" value="+7(903)123-45-67"> <br>
+            <label for="email">Электронная почта<em>*</em>  </label>
+            <input type="text" id="email" name="email" placeholder="iivanov@mail.ru" value="ppetrov@mail.ru" required> <br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Данные для проверки</legend>
+            <label for="gender">Пол  </label>
+            <select name="gender" id="gender">
+                <option value="male">Мужской</option>
+                <option value="female">Женский</option>
+            </select> <br>
+            <label for="birthdate">Дата рождения<em>*</em>  </label>
+            <input type="date" name="birthdate" id="birthdate" value="1985-03-10" required> <br>
+            <label for="lifeperiod">Срок проживания в регионе (лет)<em>*</em>  </label>
+            <input type="number" name="lifeperiod" id="lifeperiod" min="0" max="100"  value="9" required> <br>
+            <label for="profession">Профессия  </label>
+            <select name="profession" id="profession">
+                <option value="driver">Водитель</option>
+                <option value="policeman">Полицейский</option>
+                <option value="pilot">Пилот</option>
+                <option value="manager">Менеджер</option>
+                <option value="judge">Судья</option>
+                <option value="developer">Разработчик</option>
+                <option value="teacher">Преподаватель</option>
+            </select> <br>
+            <label for="sphere">Сфера деятельности<em>*</em>  </label>
+            <select name="sphere" id="sphere">
+                <option value="other">Другая</option>
+                <option value="public">Общественная</option>
+            </select> <br>
+            <label for="workperiod">Срок работы в организации (лет)<em>*</em>  </label>
+            <input type="number" name="workperiod" id="workperiod" min="0" max="60" value="3" required> <br>
+            <label for="bankAcc">Наличие банковского счета  </label>
+            <input type="checkbox" name="bankAcc" id="bankAcc" checked> <br>
+            <label for="realestate">Наличие недвижимости  </label>
+            <input type="checkbox" name="realestate" id="realestate" checked> <br>
+            <label for="insurance">Наличие страховки  </label>
+            <input type="checkbox" name="insurance" id="insurance">
+        </fieldset>
+        <br>
+        <input type="submit" value="Отправить" id="submit_btn">
+
+    </form>
+    <br>
+
+    <h3>Найти клиента по email</h3>
+    <form action="http://localhost:3000/search" method="POST">
+        <input id="client_email" type="email" name="email" placeholder="Введите email">
+        <br>
+        <input type="submit" value="Поиск">
+    </form>
+</body>
+</html>
