@@ -6,6 +6,10 @@ const MongoClient = require("mongodb").MongoClient;
 const port = 3000;
 var server = require('http').createServer(app);
 
+const request = require('request'); //http-reqs to external services
+const rp = require('request-promise');
+const cheerio = require('cheerio');
+
 app.use(
     express.urlencoded({
         extended:true
@@ -79,10 +83,40 @@ app.get('/style.css', function(req, res) {
 
 
 app.post('/scoring', (req, res)=> {
-    console.log(req.body);
+    //console.log(req.body);
     scoring = count_scoring(req.body);
 
-    const url = "mongodb://localhost:3001/";
+    var options = {
+        method: "post",
+        uri: "http://localhost:8081/python",
+        body: req.body,
+        json: true
+    }
+
+    rp(options)
+        .then(function(parsedBody){
+            res.send(`
+            <head>
+                <meta charset="UTF-8">
+                <title>Result</title>
+                <link rel="stylesheet" href="style.css">
+            </head>
+            <body>
+            <h1>Ответ от python-сервера</h1>
+            <br>
+            <h2>${parsedBody}</h2>
+            </body>`)
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+
+    /*request('http://localhost:8081/hello', (err, resp, body)=>{
+        if(err) return res.status(500).send({message:err})
+        console.log(body)
+    })*/
+
+    /*const url = "mongodb://localhost:3001/";
     const client = new MongoClient(url);
     client.connect(function(err, client){
        const db = client.db('clients');
@@ -96,13 +130,13 @@ app.post('/scoring', (req, res)=> {
            console.log(client_info);
            client.close();
        });
-    });
+    }); */
 
-    if (scoring > 1.25) {
+    /*if (scoring > 1.25) {
         res.send('Кредит одобрен!');
     } else {
         res.send('В кредите отказано!');
-    }
+    }*/
 
 });
 
@@ -112,7 +146,7 @@ server.listen(port, function(){
 
 
 
-app.post('/search', function(req, res) {
+/*app.post('/search', function(req, res) {
 
     const url = "mongodb://localhost:3001/";
     const client = new MongoClient(url);
@@ -173,4 +207,4 @@ app.post('/search', function(req, res) {
         })
     });
 
-})
+})*/
