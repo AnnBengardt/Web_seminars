@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Курсы валют</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="http://localhost:3000/currency" method="POST">
+        <h1>Выберите валюту</h1>
+        <fieldset>
+            <select name="currency" id="currency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="CNY">CNY</option>
+            </select>
+        </fieldset>
+        <br>
+        <input type="submit" value="Отправить" id="submit_btn">
+
+    </form>
+</body>
+</html>
