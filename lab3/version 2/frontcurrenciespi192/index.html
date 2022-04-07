@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Currency rate</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <script>
+    function getRate() {
+      let curr = document.getElementById("select").value;
+      let url = "https://www.cbr-xml-daily.ru/daily_json.js";
+      fetch(url) // Get request
+        .then((res)=>{
+          return res.json();
+        })
+        .then((data)=> {
+          let rate = data["Valute"][curr]["Value"];
+          document.getElementById("curr_value").innerText = rate;
+        });
+    }
+
+    async function getRate2() {
+      let curr = document.getElementById("select").value;
+      let url = "http://localhost:3000/get/"+curr;
+
+      let resp = await fetch(url);
+      let data = await resp.json();
+
+      let rate = data["value"];
+      document.getElementById("curr_value").innerText = rate;
+      
+    }
+  </script>
+  <h1>Сервис для мониторинга курса валют</h1>
+  <div id="block">
+    <label for="select">Выберите валюту: </label>
+    <select name="select" id="select" onchange="getRate2()">
+      <option value="not_selected">Не выбрано</option>
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="CNY">CNY</option>
+    </select>
+    <br>
+    <label for="curr_value"> Курс: </label>
+    <span id="curr_value">0</span>
+    </div>  
+</body>
+
+</html>

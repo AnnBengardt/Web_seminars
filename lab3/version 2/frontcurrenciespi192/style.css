@@ -1,0 +1,14 @@
+.wow {
+  width: 100px;
+}
+
+body  {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+
+label {
+  display: inline-block;
+  width: 140;
+  margin: 6;
+}
