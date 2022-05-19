@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Почта</title>
+    <style>
+        label {
+            width: 300px;
+            display: block;
+            vertical-align: center;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>var socket = io.connect("http://localhost:5000");
+    socket.on("message", function (message){
+        alert('Сервер прислал Вам сообщение: '+message);
+    });</script>
+<script>
+    async function sendMessage(){
+        var text = document.getElementById("textarea").value;
+        var email = document.getElementById("email").value;
+        //console.log("email " +email);
+        if (email == "") {
+            console.log("no email");
+            alert('Введите получателя');
+        } else {
+            socket.emit("eventClient", {message: text, receipient: email});
+        }
+    }
+</script>
+
+    <div id="wrapper">
+        <p><label>Получатель: </label><input style="width:300px;" type="email" id="email"></p>
+        <p><label>Текст:</label>
+        <textarea id="textarea" style="width: 300px; height: 150px;">
+            Привет! Как дела?
+        </textarea></p>
+    </div>
+
+    <div id="buttons">
+        <button onclick="sendMessage()" class="sendMessage">Отправить</button>
+        <button onclick="record()" class="record">Записать с микрофона</button>
+        <button onclick="voice()" class="voice">Озвучить текст</button>
+    </div>
+</body>
+</html>
